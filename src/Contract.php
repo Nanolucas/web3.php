@@ -916,8 +916,6 @@ class Contract
             }
         }
 
-        $numEventIndexedParameterNames = count($eventIndexedParameterNames);
-
         //filter through log data to find any logs which match this event (topic) from
         //this contract, between these specified blocks (defaulting to the latest block only)
         $this->eth->getLogs([
@@ -930,6 +928,8 @@ class Contract
             if ($error !== null) {
                 throw new RuntimeException($error->getMessage());
             }
+
+            $numEventIndexedParameterNames = count($eventIndexedParameterNames);
 
             foreach ($result as $object) {
                 //decode the data from the log into the expected formats, with its corresponding named key
